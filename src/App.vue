@@ -89,7 +89,7 @@
       fetchData: function({ from, to, buckets }) {
         console.log('Loading', buckets, 'records from', new Date(from * 1000), "to", new Date(to * 1000))
         this.loading = true
-        axios.get(`http://localhost:8080/api/feed/from/${from}/to/${to}?buckets=${buckets}`)
+        axios.get(`/api/feed/from/${from}/to/${to}?buckets=${buckets}`)
           .then(response => {
             this.loading = false
             this.values = calculateValues(from, response.data.interval, response.data.values)
