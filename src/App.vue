@@ -1,55 +1,8 @@
 <template>
   <div id="app">
-    <RangeChooser @chosen="fetchData"
-      :precisions="[{
-        title: 'Low detail',
-        value: 10
-      }, {
-        title: 'Standard detail',
-        value: 60
-      }, {
-        title: 'High resolution',
-        value: 200
-      }]" 
-      :ranges="[{
-        key: 'last-minutes',
-        title: 'Last minutes',
-        from: 1051123877,
-        to: 1051124477
-      }, {
-        key: 'last-hour',
-        title: 'Last hour',
-        from: 1051120877,
-        to: 1051124477
-      }, {
-        key: 'today',
-        title: 'Today',
-        from: 1051038077,
-        to: 1051124477
-      }, {
-        key: 'this-week',
-        title: 'This week',
-        from: 1050519677,
-        to: 1051124477
-      }, {
-        key: 'this-month',
-        title: 'This month',
-        from: 1048532477,
-        to: 1051124477
-      }, {
-        key: 'this-year',
-        title: 'This year',
-        from: 1019588477,
-        to: 1051124477
-      }, {
-        key: 'everything',
-        title: 'Everything',
-        from: 979675713,
-        to: 1051124477
-      }]" />
-
-    <Chart v-show="loading === false" :values="values"></chart>
+    <RangeChooser @chosen="fetchData" :precisions="precisions" :ranges="ranges" />
     <Loader v-show="loading" />
+    <Chart v-show="!loading" :values="values" />
   </div>
 </template>
 
@@ -78,7 +31,53 @@
     data() {
       return {
         loading: true,
-        values: []
+        values: [],
+        precisions: [{
+          title: 'Low detail',
+          value: 10
+        }, {
+          title: 'Standard detail',
+          value: 60
+        }, {
+          title: 'High resolution',
+          value: 200
+        }],
+        ranges: [{
+          key: 'last-minutes',
+          title: 'Last minutes',
+          from: 1051123877,
+          to: 1051124477
+        }, {
+          key: 'last-hour',
+          title: 'Last hour',
+          from: 1051120877,
+          to: 1051124477
+        }, {
+          key: 'today',
+          title: 'Today',
+          from: 1051038077,
+          to: 1051124477
+        }, {
+          key: 'this-week',
+          title: 'This week',
+          from: 1050519677,
+          to: 1051124477
+        }, {
+          key: 'this-month',
+          title: 'This month',
+          from: 1048532477,
+          to: 1051124477
+        }, {
+          key: 'this-year',
+          title: 'This year',
+          from: 1019588477,
+          to: 1051124477
+        }, {
+          key: 'everything',
+          title: 'Everything',
+          from: 979675713,
+          to: 1051124477
+        }]
       }
     },
 
