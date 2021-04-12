@@ -32,7 +32,7 @@ feedRouter.get('/from/:from/to/:to', cache.cacheSeconds(20, cacheKey), (req, res
   const to = Number(req.params.to)
   const buckets = (req.query.buckets || BUCKET_COUNT) - 1
   const match = { timestamp: { $gte: from, $lte: to }}
-  const interval = Math.round((match.timestamp.$lte - match.timestamp.$gte) / buckets)
+  const interval = Math.round((to - from) / buckets)
   const group = { 
     _id: { $round: [{ $divide: [{ $subtract: [ "$timestamp", from ]}, interval ]}]}, 
     avg: { $avg: "$num_characters" }
