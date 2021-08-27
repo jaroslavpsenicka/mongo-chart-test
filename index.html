@@ -5,6 +5,31 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   </head>
   <body>
-    <div id="app"></div>
+    This is aggregation demo, the service takes the following parameters:
+    <ul>
+      <li><b>shortCode</b> - mandatory, path param, number</li>
+      <li><b>sensor name</b> - mandatory, path param, one of: temperature, pressure, humidity, energy-clamp</li>
+      <li><b>from</b> - mandatory, path param, date range start, in ISO format</li>
+      <li><b>to</b> - mandatory, path param, date range end, in ISO format</li>
+      <li><b>precision</b> - optional, query param, if omited, it's guessed from the date range, one of: year, month, day, minute, second</li>
+    </ul>
+
+    Sample URL: ~/api/events/52/temperature/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z
+    displays temperature events of resident 52 from Aug 26th to Aug 27th.
+    
+    <h3>Examples</h3>
+    <ul>
+      <li><a href="/api/events/52/temperature/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z">temperature, default precision (hour)</a></li>
+      <li><a href="/api/events/52/temperature/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z?precision=day">temperature, daily precision</a></li>
+      <li><a href="/api/events/52/temperature/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z?precision=hour">temperature, hourly precision</a></li>
+      <li><a href="/api/events/52/temperature/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z?precision=minute">temperature, minute precision</a></li>
+      <li><a href="/api/events/52/temperature/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z?precision=second">temperature, second precision</a></li>
+      <li><a href="/api/events/52/humidity/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z">humidity, default precision (hour)</a></li>
+      <li><a href="/api/events/52/pressure/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z">atm. pressure, default precision (hour)</a></li>
+      <li><a href="/api/events/52/energy-clamp/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z">energy, default precision (hour)</a></li>
+    </ul>
+
+    Results are cached. Also note, that it returns only buckets where there are data. 
+
   </body>
 </html>
