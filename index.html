@@ -23,13 +23,21 @@
       <li><a href="/api/events/52/temperature/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z?precision=day">temperature, daily precision</a></li>
       <li><a href="/api/events/52/temperature/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z?precision=hour">temperature, hourly precision</a></li>
       <li><a href="/api/events/52/temperature/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z?precision=minute">temperature, minute precision</a></li>
-      <li><a href="/api/events/52/temperature/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z?precision=second">temperature, second precision</a></li>
+      <li><a href="/api/events/52/temperature/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z?precision=second">temperature, second precision, exceeds query complexity limit</a></li>
       <li><a href="/api/events/52/humidity/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z">humidity, default precision (hour)</a></li>
       <li><a href="/api/events/52/pressure/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z">atm. pressure, default precision (hour)</a></li>
       <li><a href="/api/events/52/energy-clamp/from/2021-08-26T00:00:00.000Z/to/2021-08-27T00:00:00.000Z">energy, default precision (hour)</a></li>
     </ul>
 
     Results are cached. Also note, that it returns only buckets where there are data. 
+
+    <h3>Query complexity</h3>
+    To avoid overloading, the system prevents querying wide ranges of dates with high precision,
+    for example in daily ranges in seconds. Practically, the output is restricted to
+    approx 1500 rows in total.
+
+    <h3>Sorting</h3>
+    Output is unsorted to further improve the performance.
 
   </body>
 </html>

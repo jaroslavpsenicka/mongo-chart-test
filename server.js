@@ -44,6 +44,16 @@ const ID_QUERIES = {
   }
 }
 
+const QCMP = {
+  month: 1/24/30,
+  day: 1/24,
+  hour: 1,
+  minute: 60,
+  second: 3600
+}
+
+const MAX_QCMP = 1500
+
 const app = express();
 
 app.use(bodyParser.json());
@@ -78,6 +88,12 @@ eventsRouter.get('/:shortCode/:sensor/from/:from/to/:to', cache.cacheSeconds(20,
   const from = new Date(req.params.from)
   const to = new Date(req.params.to)
   const precision = req.query.precision || guessPrecision(from, to)
+
+  const qCmp = (to.getTime() - from.getTime()) / ONE_HOUR * QCMP[precision]
+  if (qCmp > MAX_QCMP) {
+    return res.status(400).json({ error: `max query complexity ${MAX_QCMP} exceeded: ${qCmp}` });
+  }
+
   const match = { 
     "hub.shortCode": shortCode,
     "sensor": sensor,
